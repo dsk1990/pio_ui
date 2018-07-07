@@ -38,7 +38,10 @@ HEADERS += \
     ad7992.h \
     ch367.h \
     datamanager.h \
-    scheduler.h
+    scheduler.h \
+    i2cdev.h \
+    device.h \
+    io.h
 
 INCLUDEPATH += $$PWD/CH367
 LIBS += $$PWD/CH367/CH367DLL.lib
