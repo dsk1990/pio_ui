@@ -10,11 +10,14 @@ public:
     Ad7992();
     ~Ad7992();
     bool init(CH367* pDev);
+//    bool init(I2C* i2c, IO* io);
     bool getValue(quint16* oValue);
 
 private:
     bool initFlag;
     CH367* pCh367;
+    //I2C* i2c;
+    //IO*   io;
 };
 
 //class I2C{

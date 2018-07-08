@@ -6,9 +6,12 @@ public:
     virtual bool open();
     virtual bool close();
     virtual bool isOpen();
+    virtual bool getHandle();
 
-private:
-    bool openFlag;
+////抽象类是否带有成员变量？
+/// 具体device 实现可能已有isopen的接口
+//private:
+//    bool openFlag;
 }
 
 #endif // DEVICE_H

@@ -19,6 +19,7 @@ public:
     quint32 getUpperLimitAlarm() const { return upperLimitAlarm; }
     quint32 getLowerLimitAlarm() const { return lowerLimitAlarm; }
 
+public slots:
     void setMeasuredValue(quint32 value);
     void setUpperLimit(quint32 value);
     void setLowerLimit(quint32 value);

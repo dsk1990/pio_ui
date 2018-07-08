@@ -24,7 +24,7 @@ void DataManager::clear()
 void DataManager::setMeasuredValue(quint32 value){
     measuredValue = value;
     updateDisplayValue();
-    emit dataChanged();
+    emit dataChanged(/*enum setMeasuredValue, quint32 value*/);
 }
 
 

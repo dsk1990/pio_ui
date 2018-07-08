@@ -2,6 +2,7 @@
 #define CH367_H
 
 #include "CH367DLL.H"
+#include <Windows.h>
 
 //CH367
 class CH367
