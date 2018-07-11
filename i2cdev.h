@@ -11,15 +11,15 @@ public:
 //    virtual void initialize();
 //    virtual void enable(bool isEnabled);
 
-    virtual bool readByte(uint8_t devAddr, uint8_t regAddr, uint8_t *data) ＝ 0;
-    virtual bool readWord(uint8_t devAddr, uint8_t regAddr, uint16_t *data);
-    virtual bool readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data);
-    virtual bool readWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint16_t *data);
+    virtual bool readI2CByte(uint8_t devAddr, uint8_t regAddr, uint8_t *data) = 0;
+    virtual bool readI2CWord(uint8_t devAddr, uint8_t regAddr, uint16_t *data) = 0;
+    virtual bool readI2CBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data) = 0;
+    virtual bool readI2CWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint16_t *data) = 0;
 
-    virtual bool writeByte(uint8_t devAddr, uint8_t regAddr, uint8_t data);
-    virtual bool writeWord(uint8_t devAddr, uint8_t regAddr, uint16_t data);
-    virtual bool writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data);
-    virtual bool writeWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint16_t *data);
+    virtual bool writeI2CByte(uint8_t devAddr, uint8_t regAddr, uint8_t data) = 0;
+    virtual bool writeI2CWord(uint8_t devAddr, uint8_t regAddr, uint16_t data) = 0;
+    virtual bool writeI2CBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data) = 0;
+    virtual bool writeI2CWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint16_t *data) = 0;
 };
 
 

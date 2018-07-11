@@ -8,13 +8,13 @@
 
 class IO {
 public:
-    virtual bool reset();
+    virtual bool resetIO() = 0;
 
-    virtual bool readInputByte(quint8 addr, quint8* oData);
-    virtual bool readInputBit(quint8 addr, quint8 bitNum, quint8* oData);
+    virtual bool readIOByte(quint8 addr, quint8* oData) = 0;
+    virtual bool readIOBit(quint8 addr, quint8 bitNum, quint8* oData) = 0;
 
-    virtual bool writeOutputByte(quint8 addr, quint8 iData);
-    virtual bool writeOutputBit(quint8 addr, quint8 bitNum, quint8 iData);
+    virtual bool writeIOByte(quint8 addr, quint8 iData) = 0;
+    virtual bool writeIOBit(quint8 addr, quint8 bitNum, quint8 iData) = 0;
 //    virtual bool readOutputByte(quint8 addr, quint8* oData);
 //    virtual bool readOutputBit(quint8 addr, quint8 bitNum, quint8* oData);
 
