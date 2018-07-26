@@ -2,7 +2,7 @@
 
 DataManager::DataManager()
 {
-    clear();
+    doClear();
 }
 
 DataManager::~DataManager()
@@ -10,7 +10,7 @@ DataManager::~DataManager()
 
 }
 
-void DataManager::clear()
+void DataManager::doClear()
 {
     measuredValue = 0;
     displayValue = 0;
@@ -19,6 +19,10 @@ void DataManager::clear()
     compensationValue = 0;
     upperLimitAlarm = false;
     lowerLimitAlarm = false;
+    peakValue = 0;
+    valleyValue = 0;
+
+    dataQueue.clear();
 }
 
 void DataManager::setMeasuredValue(quint32 value){
@@ -26,7 +30,6 @@ void DataManager::setMeasuredValue(quint32 value){
     updateDisplayValue();
     emit dataChanged(/*enum setMeasuredValue, quint32 value*/);
 }
-
 
 void DataManager::setUpperLimit(quint32 value){
     upperLimit = value;
@@ -46,11 +49,12 @@ void DataManager::setCompensationValue(quint32 value){
     emit dataChanged();
 }
 
-
 void DataManager::updateDisplayValue(){
     displayValue = measuredValue + compensationValue;
     updateUpperLimitAlarm();
     updateLowerLimitAlarm();
+    updatePeakValue();
+    updateValleyValue();
 }
 
 void DataManager::updateUpperLimitAlarm(){
@@ -60,3 +64,16 @@ void DataManager::updateUpperLimitAlarm(){
 void DataManager::updateLowerLimitAlarm(){
     lowerLimitAlarm = displayValue < lowerLimit;
 }
+
+void DataManager::updatePeakValue(){
+    if(displayValue > peakValue){
+        peakValue = displayValue;
+    }
+}
+
+void DataManager::updateValleyValue(){
+    if(displayValue < valleyValue){
+        valleyValue = displayValue;
+    }
+}
+
