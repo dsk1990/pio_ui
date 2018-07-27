@@ -20,6 +20,10 @@ void Scheduler::start(){
     m_timer->start();
 }
 
+void Scheduler::setRefreshInterval(quint32 value){
+    m_timer->setInterval(value);
+}
+
 void Scheduler::polling(){
     quint16 measuredValue = 0;
     if(m_ad7992->getValue(&measuredValue)){

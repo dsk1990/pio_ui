@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent, DataManager *data)
     connect(m_ui, &PioWidget::requestSetDeviation, m_data, &DataManager::setCompensationValue);
     connect(m_ui, &PioWidget::requestSetUpper, m_data, &DataManager::setUpperLimit);
     connect(m_ui, &PioWidget::requestSetLower, m_data, &DataManager::setLowerLimit);
-    connect(m_ui, &PioWidget::requestDoReset, m_data, &DataManager::clear);
+    connect(m_ui, &PioWidget::requestDoReset, m_data, &DataManager::doClear);
 
     connect(m_data, &DataManager::dataChanged, this, &MainWindow::updateDataShow);
 }

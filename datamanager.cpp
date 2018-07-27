@@ -1,8 +1,9 @@
 #include "datamanager.h"
+#include <algorithm>
 
 DataManager::DataManager()
 {
-    doClear();
+    doReset();
 }
 
 DataManager::~DataManager()
@@ -10,13 +11,25 @@ DataManager::~DataManager()
 
 }
 
-void DataManager::doClear()
+void DataManager::doReset()
 {
     measuredValue = 0;
     displayValue = 0;
     upperLimit = 0;
     lowerLimit = 0;
     compensationValue = 0;
+    upperLimitAlarm = false;
+    lowerLimitAlarm = false;
+    peakValue = 0;
+    valleyValue = 0;
+
+    queueLength = 1;
+    dataQueue.clear();
+}
+
+void DataManager::doClear()
+{
+    displayValue = 0;
     upperLimitAlarm = false;
     lowerLimitAlarm = false;
     peakValue = 0;
@@ -49,12 +62,19 @@ void DataManager::setCompensationValue(quint32 value){
     emit dataChanged();
 }
 
+void DataManager::setQueueLength(quint32 value){
+    queueLength = value;
+    while((quint32)dataQueue.size() > queueLength){
+        dataQueue.dequeue();
+    }
+    emit dataChanged();
+}
+
 void DataManager::updateDisplayValue(){
     displayValue = measuredValue + compensationValue;
     updateUpperLimitAlarm();
     updateLowerLimitAlarm();
-    updatePeakValue();
-    updateValleyValue();
+    updateQueue(displayValue);
 }
 
 void DataManager::updateUpperLimitAlarm(){
@@ -66,14 +86,24 @@ void DataManager::updateLowerLimitAlarm(){
 }
 
 void DataManager::updatePeakValue(){
-    if(displayValue > peakValue){
+    if(dataQueue.size() == 1){
         peakValue = displayValue;
     }
+    peakValue = std::max(peakValue, displayValue);
 }
 
 void DataManager::updateValleyValue(){
-    if(displayValue < valleyValue){
+    if(dataQueue.size() == 1){
         valleyValue = displayValue;
     }
+    valleyValue = std::min(valleyValue, displayValue);
 }
 
+void DataManager::updateQueue(quint32 value){
+    if((quint32)dataQueue.size() >= queueLength){
+        dataQueue.dequeue();
+    }
+    dataQueue.enqueue(value);
+    updatePeakValue();
+    updateValleyValue();
+}

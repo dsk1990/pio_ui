@@ -16,7 +16,9 @@ public:
     Scheduler(Ad7992* ad7992, DataManager* data);
     ~Scheduler();
 
+public slots:
     void start();
+    void setRefreshInterval(quint32 value);
 
 private:
     void polling();

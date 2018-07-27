@@ -22,16 +22,17 @@ public:
     quint32 getPeakValue()          const { return peakValue; }
     quint32 getValleyValue()        const { return valleyValue; }
 
-//    QQueue<quint32> getBuffer() const {return dataQueue; }
-//    QQueue<quint32>& getBuffer() const {return dataQueue; }
+    QQueue<quint32> getDataQueue()  const { return dataQueue; }
 
 public slots:
-    void doClear();
+    void doReset();//reset all
+    void doClear();//clear main page
 
     void setMeasuredValue(quint32 value);
     void setUpperLimit(quint32 value);
     void setLowerLimit(quint32 value);
     void setCompensationValue(quint32 value);
+    void setQueueLength(quint32 value);
 
 signals:
     void dataChanged();
@@ -44,6 +45,7 @@ private:
     quint32 compensationValue;
     quint32 peakValue;
     quint32 valleyValue;
+    quint32 queueLength;
 
     QQueue<quint32> dataQueue;
 
@@ -55,6 +57,7 @@ private:
     void updateLowerLimitAlarm();
     void updatePeakValue();
     void updateValleyValue();
+    void updateQueue(quint32 value);
 };
 
 #endif // DATAMANAGER_H
